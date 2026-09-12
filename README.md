@@ -5,14 +5,36 @@
 
 **中文说明在上，English below.**
 
+> ⚠️ **适用范围：仅限 Gateway 模式（自己接入 API 的用户），不适用于官方订阅用户**
+>
+> 本工具是开发者本人为解决自己的痛点而做的——我在 Claude Desktop 里用的是 **Gateway 模式**，也就是**自己接入第三方 / 自建的 API**（配合 [CC Switch](https://github.com/farion1231/cc-switch) 这类工具来切换、管理各家 API 供应商），而**不是**用 Claude 官方订阅登录。这种模式下，所有对话以明文形式存在本机磁盘上，本工具正是直接读取这些本地文件。
+>
+> 如果你用的是 **Claude 官方订阅**（在客户端里登录 Anthropic 账号使用），你的对话**不以这种形式存储在本地**，本工具**读不到、也不适用**。请勿在官方订阅场景下期待它能导出你的对话。
+
+> ⚠️ **Scope: Gateway mode only (bring-your-own-API users). NOT for official subscription users.**
+>
+> This tool was built by its author to scratch a personal itch. I use Claude Desktop in **Gateway mode** — connecting my **own / third-party API** (using tools like [CC Switch](https://github.com/farion1231/cc-switch) to switch and manage API providers for Claude Desktop), rather than signing in with an official Claude subscription. In this mode every conversation is stored as plaintext on your local disk, and this tool reads those local files directly.
+>
+> If you use an **official Claude subscription** (signing into your Anthropic account in the client), your conversations are **not stored this way locally**, so this tool **cannot read them and does not apply**. Please don't expect it to export your chats in that case.
+
 纯 Python 标准库实现，无第三方依赖。全程在本机运行，以只读方式读取对话文件，本身不含任何联网功能。
 Pure Python standard library, no third-party dependencies. Runs entirely on your machine, reads conversation files read-only, and includes no networking functionality.
 
 > **状态 / Status**
 >
-> 🪟 仅支持 **Windows**（其它平台未测试）。目前仅在作者本人电脑上测试通过，虚拟机环境的兼容性测试正在进行中，届时会更新本说明。欢迎试用并反馈问题。
+> 🪟 **主要面向 Windows。** 目前仅在作者本人的 Windows 电脑上测试通过，虚拟机环境的兼容性测试正在进行中，届时会更新本说明。发布的 `.exe` 也仅限 Windows。
 >
-> 🪟 **Windows only** (other platforms untested). So far verified only on the author's own machine; compatibility testing in a clean virtual machine is in progress and this README will be updated accordingly. Try it out and please report issues.
+> 🍎 **macOS / Linux 未经验证。** 代码里为 Mac/Linux 预留了路径猜测，但作者没有 Mac/Linux 设备实测过，很可能需要手动指定目录、甚至改动代码才能跑起来，不保证可用。
+>
+> 🙋 作者是一名**计算机专业大二在读学生，能力有限**，这个工具是为解决自己的痛点顺手做的。如果你遇到无法使用的情况，**非常欢迎提 [Issue](../../issues) 反馈**（附上系统、报错信息最好），也**欢迎 Fork 自行改进**。
+>
+> ---
+>
+> 🪟 **Windows-first.** So far verified only on the author's own Windows machine; compatibility testing in a clean VM is in progress and this README will be updated accordingly. The released `.exe` is Windows-only.
+>
+> 🍎 **macOS / Linux not verified.** The code includes guessed paths for Mac/Linux, but the author has no Mac/Linux device to test on — it may well need manual folder selection or even code changes, and is not guaranteed to work.
+>
+> 🙋 The author is a **second-year computer science undergraduate with limited experience**, and built this to scratch a personal itch. If it doesn't work for you, please **open an [Issue](../../issues)** (ideally with your OS and any error output) — and **feel free to Fork and improve it**.
 
 ---
 
@@ -20,12 +42,12 @@ Pure Python standard library, no third-party dependencies. Runs entirely on your
 
 ### 这个工具解决什么问题
 
-在 Claude Desktop 的 **Gateway / 自接 API 模式**下，所有对话都存在本机。但有两个痛点：
+在 Claude Desktop 的 **Gateway / 自接 API 模式**下，所有对话都存在本机，但要方便地回看和留存并不容易，尤其是：
 
-1. **侧边栏不显示历史会话**（已知 bug [#83164](https://github.com/anthropics/claude-code/issues)）——会话数据明明在磁盘上，界面却列不出来。
-2. **上下文压缩会"吃掉"早期内容**——一旦对话被自动压缩接续，界面里就再也翻不到最早的那些消息了。
+- **想集中查看、检索、归档历史对话**——把本机所有会话列在一起浏览、搜索，比在客户端里一条条翻方便得多。
+- **上下文压缩会"吃掉"早期内容**——一旦对话被自动压缩接续，界面里就再也翻不到最早的那些消息了。
 
-本工具直接扫描本机会话目录，把**全部**对话列出来，并能一键导出成 Markdown 或 HTML 网页归档。
+本工具直接扫描本机会话目录，把**全部**对话列出来供浏览、搜索，并能一键导出成 Markdown 或 HTML 网页归档——**包括被上下文压缩掉的早期内容**。
 
 ### 为什么它能拿到"完整"历史
 
@@ -98,12 +120,12 @@ python claude_history_tool.py
 
 ### What it solves
 
-In Claude Desktop's **Gateway / bring-your-own-API mode**, all conversations are stored locally, but two things hurt:
+In Claude Desktop's **Gateway / bring-your-own-API mode**, all conversations are stored locally, but reviewing and preserving them isn't easy:
 
-1. **The sidebar doesn't list past conversations** (known bug #83164) — the data is on disk, but the UI won't show it.
-2. **Context compaction "eats" early content** — once a conversation is auto-compacted, you can no longer scroll back to the earliest messages in the UI.
+- **You want to browse, search, and archive past conversations in one place** — far handier than scrolling through them one by one in the client.
+- **Context compaction "eats" early content** — once a conversation is auto-compacted, you can no longer scroll back to the earliest messages in the UI.
 
-This tool scans your local session directory, lists **every** conversation, and exports any of them to Markdown or an HTML page for archiving.
+This tool scans your local session directory, lists **every** conversation for browsing and search, and exports any of them to Markdown or an HTML page for archiving — **including the early content lost to context compaction**.
 
 ### Why it recovers the *complete* history
 
