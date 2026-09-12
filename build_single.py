@@ -8,7 +8,13 @@
     调用解析到本文件顶层同名函数。
   - 重复的 `import os/re/json/...` 保留无妨(幂等)。
 """
-import io, os, re
+import io, os, re, sys
+
+# GitHub Windows runner 默认 stdout 用 cp1252，打印非 ASCII 会崩。强制 UTF-8。
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    pass
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -80,7 +86,7 @@ def main():
     out = "\n".join(parts)
     with open(os.path.join(HERE, "claude_history_tool.py"), "w", encoding="utf-8") as f:
         f.write(out)
-    print("已生成 claude_history_tool.py，共", len(out.splitlines()), "行")
+    print("Generated claude_history_tool.py -", len(out.splitlines()), "lines")
 
 
 if __name__ == "__main__":
