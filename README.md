@@ -26,7 +26,7 @@ Pure Python standard library, no third-party dependencies. Runs entirely on your
 >
 > 🍎 **macOS / Linux 未经验证。** 代码里为 Mac/Linux 预留了路径猜测，但作者没有 Mac/Linux 设备实测过，很可能需要手动指定目录、甚至改动代码才能跑起来，不保证可用。
 >
-> 🙋 作者是一名**计算机专业大二在读学生，能力有限**，这个工具是为解决自己的痛点顺手做的。如果你遇到无法使用的情况，**非常欢迎提 [Issue](../../issues) 反馈**（附上系统、报错信息最好），也**欢迎 Fork 自行改进**。
+> 🙋 作者是一名**计算机专业大二在读学生，能力有限**，这个工具是为解决自己的痛点顺手做的，也是**作者发布的第一个开源项目**。如果你遇到无法使用的情况，**非常欢迎提 [Issue](../../issues) 反馈**（附上系统、报错信息最好），也**欢迎 Fork 自行改进**，还请多多包涵。
 >
 > ---
 >
@@ -34,7 +34,7 @@ Pure Python standard library, no third-party dependencies. Runs entirely on your
 >
 > 🍎 **macOS / Linux not verified.** The code includes guessed paths for Mac/Linux, but the author has no Mac/Linux device to test on — it may well need manual folder selection or even code changes, and is not guaranteed to work.
 >
-> 🙋 The author is a **second-year computer science undergraduate with limited experience**, and built this to scratch a personal itch. If it doesn't work for you, please **open an [Issue](../../issues)** (ideally with your OS and any error output) — and **feel free to Fork and improve it**.
+> 🙋 The author is a **second-year computer science undergraduate with limited experience**, and built this to scratch a personal itch — this is also the **author's first open-source project**. If it doesn't work for you, please **open an [Issue](../../issues)** (ideally with your OS and any error output) — and **feel free to Fork and improve it**. Thanks for your understanding.
 
 ---
 
