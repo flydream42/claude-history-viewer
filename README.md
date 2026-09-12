@@ -8,6 +8,12 @@
 纯 Python 标准库实现，无第三方依赖。只在本机运行、只读你的对话文件、绝不联网上传。
 Pure Python standard library, no third-party dependencies. Runs locally, reads your data read-only, never uploads anything.
 
+> **状态 / Status**
+>
+> 🪟 仅支持 **Windows**（其它平台未测试）。目前仅在作者本人电脑上测试通过，虚拟机环境的兼容性测试正在进行中，届时会更新本说明。欢迎试用并反馈问题。
+>
+> 🪟 **Windows only** (other platforms untested). So far verified only on the author's own machine; compatibility testing in a clean virtual machine is in progress and this README will be updated accordingly. Try it out and please report issues.
+
 ---
 
 ## 中文说明
