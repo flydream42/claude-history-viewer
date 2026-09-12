@@ -5,8 +5,8 @@
 
 **中文说明在上，English below.**
 
-纯 Python 标准库实现，无第三方依赖。只在本机运行、只读你的对话文件、绝不联网上传。
-Pure Python standard library, no third-party dependencies. Runs locally, reads your data read-only, never uploads anything.
+纯 Python 标准库实现，无第三方依赖。全程在本机运行，以只读方式读取对话文件，本身不含任何联网功能。
+Pure Python standard library, no third-party dependencies. Runs entirely on your machine, reads conversation files read-only, and includes no networking functionality.
 
 > **状态 / Status**
 >
@@ -68,8 +68,8 @@ python claude_history_tool.py
 
 ### 隐私声明
 
-- **只读**你的对话文件，从不修改。
-- **绝不联网**、绝不把任何内容上传到任何地方。全部处理在本机完成。
+- 以**只读**方式访问对话文件，不做任何写入或修改。
+- 代码本身不含联网功能，所有处理都在本机完成，数据不离开你的电脑。
 - 本地服务只监听 `127.0.0.1`（本机回环），同一网络的其它设备访问不到。
 - 界面里显示的用户名取自你当前的系统登录名（可用环境变量 `CLAUDE_HISTORY_USERNAME` 覆盖），源码里不写死任何人的名字。
 - ⚠️ 如果你 fork 本仓库，请务必**不要**把你自己的对话数据、`audit.jsonl`、或导出结果提交上去。仓库自带的 `.gitignore` 已经帮你挡住了这些文件。
@@ -136,8 +136,8 @@ No Python? Install Python 3 from <https://www.python.org/downloads/> and check *
 
 ### Privacy
 
-- **Read-only** access to your conversation files; never modifies them.
-- **No network**, ever — nothing is uploaded anywhere. All processing is local.
+- **Read-only** access to your conversation files; no writes or modifications.
+- The code contains no networking functionality; all processing happens locally and your data never leaves your machine.
 - The local server binds to `127.0.0.1` only; other devices on your network cannot reach it.
 - The displayed username is taken from your current OS login (override with the `CLAUDE_HISTORY_USERNAME` env var). No personal name is hardcoded anywhere in the source.
 - ⚠️ If you fork this repo, **do not** commit your own conversation data, `audit.jsonl`, or exports. The bundled `.gitignore` already blocks them.
