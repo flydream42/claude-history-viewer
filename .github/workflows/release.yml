@@ -1,0 +1,50 @@
+name: Build Windows EXE and Release
+
+# 推送形如 v1.0.0 的标签时触发；也可在 Actions 页手动触发。
+# Triggers on pushing a tag like v1.0.0; can also be run manually from the Actions tab.
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write   # 允许创建 Release 并上传资产 / needed to create a Release and upload assets
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pip pyinstaller
+
+      - name: Regenerate single-file build
+        run: python build_single.py
+
+      - name: Build EXE (onefile)
+        run: >
+          pyinstaller --onefile --console
+          --name "ClaudeHistoryViewer"
+          claude_history_tool.py
+
+      - name: Upload EXE as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ClaudeHistoryViewer-windows
+          path: dist/ClaudeHistoryViewer.exe
+
+      # 仅在打标签时创建 Release 并附上 exe / attach exe to a Release only on tag push
+      - name: Publish Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/ClaudeHistoryViewer.exe
+          generate_release_notes: true

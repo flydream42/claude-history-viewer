@@ -1,0 +1,40 @@
+# ============================================================
+#  隐私优先 / Privacy first
+#  绝不提交任何对话数据、导出结果、或本地会话副本。
+#  Never commit conversation data, exports, or local session copies.
+# ============================================================
+
+# 会话数据 / session data (原始记录，绝不上传)
+local_*.json
+*.jsonl
+audit.jsonl
+对话数据副本/
+local-agent-mode-sessions/
+**/.claude/
+
+# 导出结果 / export outputs
+Claude对话导出/
+Claude-Chat-Export/
+exports/
+*.export.md
+*.export.html
+
+# 打包产物 / build artifacts
+dist/
+build/
+*.spec
+*.exe
+__pycache__/
+*.pyc
+*.pyo
+
+# 虚拟环境 / venv
+.venv/
+venv/
+env/
+
+# 编辑器 / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
